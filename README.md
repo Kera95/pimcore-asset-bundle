@@ -1,5 +1,7 @@
 # TsfAssetBundle
 
+[![Codeception](https://github.com/Kera95/pimcore-asset-bundle/actions/workflows/codeception.yml/badge.svg)](https://github.com/Kera95/pimcore-asset-bundle/actions/workflows/codeception.yml)
+
 Automatically sort assets referenced by DataObjects and Documents in
 [Pimcore](https://pimcore.com/) 11.x, 12.x, and 2026.x.
 
@@ -243,6 +245,8 @@ Standalone:
 composer install
 vendor/bin/codecept run
 ```
+
+The GitHub Actions workflow runs the same command against Pimcore 11.x, 12.x, and 2026.x.
 
 From inside a Pimcore project that consumes the bundle as a path package (no `composer install`
 in the bundle needed — the bootstrap falls back to the project autoloader):
