@@ -1,5 +1,5 @@
 {
-  "name": "tsf/pimcore-asset-bundle",
+  "name": "kerimkaralic/pimcore-asset-bundle",
   "description": "Automatically sorts Pimcore assets referenced by DataObjects and Documents into configurable folder structures.",
   "type": "pimcore-bundle",
   "license": "MIT",
