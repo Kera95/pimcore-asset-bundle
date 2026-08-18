@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Tsf\AssetBundle\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Installer.php'
+            - '../src/TsfAssetBundle.php'
+
+    Tsf\AssetBundle\Installer:
+        public: true
+        arguments:
+            $bundle: "@=service('kernel').getBundle('TsfAssetBundle')"
