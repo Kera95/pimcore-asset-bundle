@@ -8,6 +8,7 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
+            - '../src/Model/'
             - '../src/Installer.php'
             - '../src/TsfAssetBundle.php'
 
@@ -15,3 +16,13 @@ services:
         public: true
         arguments:
             $bundle: "@=service('kernel').getBundle('TsfAssetBundle')"
+
+    Tsf\AssetBundle\EventListener\DataObjectListener:
+        tags:
+            - { name: kernel.event_listener, event: pimcore.dataobject.postAdd, method: onPostAdd }
+            - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onPreUpdate }
+
+    Tsf\AssetBundle\EventListener\DocumentListener:
+        tags:
+            - { name: kernel.event_listener, event: pimcore.document.postAdd, method: onPostAdd }
+            - { name: kernel.event_listener, event: pimcore.document.preUpdate, method: onPreUpdate }
