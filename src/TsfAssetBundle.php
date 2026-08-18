@@ -25,7 +25,7 @@ class TsfAssetBundle extends AbstractPimcoreBundle
 
     public function getComposerPackageName(): string
     {
-        return 'tsf/pimcore-asset-bundle';
+        return 'kerimkaralic/pimcore-asset-bundle';
     }
 
     public function getVersion(): string

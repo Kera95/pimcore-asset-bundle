@@ -5,7 +5,7 @@
 Automatically sort assets referenced by DataObjects and Documents in
 [Pimcore](https://pimcore.com/) 11.x, 12.x, and 2026.x.
 
-- Composer package: `tsf/pimcore-asset-bundle`
+- Composer package: `kerimkaralic/pimcore-asset-bundle`
 - Namespace: `Tsf\AssetBundle`
 - Bundle class: `Tsf\AssetBundle\TsfAssetBundle`
 - Config alias: `tsf_asset`
@@ -33,7 +33,7 @@ so the same sorting implementation is used on all supported lines.
 ## Installation
 
 ```bash
-composer require tsf/pimcore-asset-bundle
+composer require kerimkaralic/pimcore-asset-bundle
 ```
 
 Register the bundle in `config/bundles.php`:
@@ -225,11 +225,11 @@ The bundle is consumed through a composer **path repository** so the working cop
     { "type": "path", "url": "bundles/Tsf/AssetBundle" }
 ],
 "require": {
-    "tsf/pimcore-asset-bundle": "@dev"
+    "kerimkaralic/pimcore-asset-bundle": "@dev"
 }
 ```
 
-`vendor/tsf/pimcore-asset-bundle` is a symlink to the working copy, so edits apply immediately —
+`vendor/kerimkaralic/pimcore-asset-bundle` is a symlink to the working copy, so edits apply immediately —
 only `bin/console cache:clear` is needed. Adding new classes needs no `dump-autoload`, since the
 package's own PSR-4 mapping covers `src/`.
 
