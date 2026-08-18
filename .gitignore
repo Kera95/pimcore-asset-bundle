@@ -2,3 +2,6 @@
 composer.lock
 .php-cs-fixer.cache
 .phpunit.result.cache
+/codeception.yml
+/tests/*.suite.yml
+/tests/_output/

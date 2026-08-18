@@ -193,6 +193,11 @@ src/Service/Assets/
   PathTokens.php                   # token catalogue, shared by config info and command
 src/Service/Config/
   SortingConfiguration.php         # picks the rule for an element
+codeception.dist.yml               # test runner configuration
+tests/
+  _bootstrap.php                   # autoloader + Pimcore kernel stub, no database
+  Support/                         # test doubles and factories
+  Unit/                            # unit suite, mirrors src/
 ```
 
 Everything under `src/` is auto-registered as a private, autowired service. `Installer` is excluded
@@ -225,6 +230,44 @@ The bundle is consumed through a composer **path repository** so the working cop
 `vendor/tsf/pimcore-asset-bundle` is a symlink to the working copy, so edits apply immediately —
 only `bin/console cache:clear` is needed. Adding new classes needs no `dump-autoload`, since the
 package's own PSR-4 mapping covers `src/`.
+
+## Tests
+
+Codeception, mirroring how the Pimcore core bundles are tested. The unit suite needs no database,
+no OpenSearch and no booted Pimcore kernel — `tests/_bootstrap.php` installs a stub kernel that
+only provides the event dispatcher `Pimcore\Model\Element\Service` reaches for.
+
+Standalone:
+
+```bash
+composer install
+vendor/bin/codecept run
+```
+
+From inside a Pimcore project that consumes the bundle as a path package (no `composer install`
+in the bundle needed — the bootstrap falls back to the project autoloader):
+
+```bash
+docker compose exec -T -w /var/www/html/bundles/Tsf/AssetBundle php \
+    php /var/www/html/vendor/bin/codecept run Unit
+```
+
+What is covered:
+
+| Class | Covered |
+|---|---|
+| `PathTokens` | token catalogue, unknown and malformed token detection |
+| `PathResolver` | every token, the unresolved-token bail-out and its log line, key sanitising |
+| `SortingRule` | fallback path and per asset type overrides |
+| `SortingConfiguration` | section and class rules, disable switches, asset type inheritance |
+| `Configuration` | defaults, merging, and every path pattern validation error |
+| `TsfAssetExtension` | services, parameters, listener tags, injected sorting sub-tree |
+| `DataObject`/`DocumentListener` | delegation and the folder / non-`PageSnippet` guards |
+| `AssetStructureSorter` | which assets get collected from fields, editables and value objects |
+
+Not covered by the unit suite: `AssetStructureSorter::moveAsset()` and `getUniqueFilename()`, which
+go through `Pimcore\Model\Asset\Service::createFolderByPath()` and `Asset::save()` and therefore
+need a real installation. Those belong in a functional suite run against a test database.
 
 ## Versioning
 
