@@ -1,15 +1,16 @@
 {
   "name": "tsf/pimcore-asset-bundle",
-  "description": "Asset functionality for Pimcore.",
+  "description": "Automatically sorts Pimcore assets referenced by DataObjects and Documents into configurable folder structures.",
   "type": "pimcore-bundle",
   "license": "MIT",
   "keywords": ["pimcore", "pimcore-bundle", "asset"],
   "require": {
-    "php": "~8.4.0 || ~8.5.0",
-    "pimcore/pimcore": "^2026.2",
-    "symfony/config": "^7.4",
-    "symfony/dependency-injection": "^7.4",
-    "symfony/http-kernel": "^7.4"
+    "php": ">=8.1 <8.6",
+    "pimcore/pimcore": "^11.0 || ^12.0 || ^2026.1",
+    "symfony/config": "^6.2 || ^7.3",
+    "symfony/console": "^6.2 || ^7.3",
+    "symfony/dependency-injection": "^6.2 || ^7.3",
+    "symfony/http-kernel": "^6.2 || ^7.3"
   },
   "autoload": {
     "psr-4": {

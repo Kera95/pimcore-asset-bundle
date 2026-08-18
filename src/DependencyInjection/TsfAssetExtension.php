@@ -8,6 +8,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Tsf\AssetBundle\Service\Config\SortingConfiguration;
 
 final class TsfAssetExtension extends Extension
 {
@@ -24,5 +25,8 @@ final class TsfAssetExtension extends Extension
         );
 
         $loader->load('services.yaml');
+
+        $container->getDefinition(SortingConfiguration::class)
+            ->setArgument('$config', $config['sorting']);
     }
 }

@@ -1,0 +1,48 @@
+# Copy this file to config/packages/tsf_asset.yaml in the consuming Pimcore project.
+# Only repeat keys that should differ in config/packages/{env}/tsf_asset.yaml.
+
+tsf_asset:
+    sorting:
+        data_objects:
+            # Master switch for assets referenced by DataObjects.
+            enabled: true
+
+            # Fallback for every class without an entry under "classes".
+            # Example: Sunset.jpg on a Product -> /Product/s/u/Sunset.jpg
+            path: '/{class}/{char:1}/{char:2}'
+
+            # Optional overrides keyed by Pimcore's asset type.
+            asset_types:
+                document: '/documents/{class}/{char:1}'
+
+            classes:
+                Product:
+                    enabled: true
+
+                    # Example: SKU AB-1000 and Sunset.jpg
+                    # -> /product/AB-1000/s/u/Sunset.jpg
+                    path: '/product/{field:sku}/{char:1}/{char:2}'
+
+                    asset_types:
+                        document: '/product/{field:sku}/datasheets'
+                        video: '/product/{field:sku}/videos'
+
+                # Article:
+                #     path: '/editorial/{date:Y}/{date:m}/{char:1}'
+                #
+                # Category:
+                #     enabled: false
+
+        documents:
+            # Disabled by default. Enable after adapting the path to the project.
+            enabled: false
+            path: '/documents/{doctype}/{key}'
+            asset_types:
+                video: '/documents/media/{key}'
+
+# Example partial development override (place in config/packages/dev/tsf_asset.yaml):
+#
+# tsf_asset:
+#     sorting:
+#         data_objects:
+#             enabled: false

@@ -20,7 +20,7 @@ class TsfAssetBundle extends AbstractPimcoreBundle
 
     public function getDescription(): string
     {
-        return 'Project specific asset functionality.';
+        return 'Moves referenced assets into configurable folder structures when DataObjects and Documents are saved.';
     }
 
     public function getComposerPackageName(): string
